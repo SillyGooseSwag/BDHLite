@@ -14,46 +14,6 @@ if not LPH_OBFUSCATED then
 end
 --]]
 
---Anti-cheat disable
-if getgenv().antiCheatEnabled ~= true then
-    getgenv().antiCheatEnabled = true
-    LPH_JIT_MAX(function()
-        local events = {"OneMoreTime", "TeleportDetect", "CHECKER_1", "CHECKER_2", "OneMoreTime", "BreathingHAMON", "VirusCough"}
-        local hook = nil
-        hook = hookmetamethod(game, "__namecall", function(...)
-            local Args = {...}
-            local self = Args[1]
-            local namecall = getnamecallmethod()
-            local calledFromExecutor = checkcaller()
-            --local callingScript = getcallingscript()
-
-            if namecall == "FireServer" and self == MAIN_EVENT then
-                if table.find(events, Args[2]) then -- anti-anti-cheat
-                    return nil
-                elseif calledFromExecutor == false then
-                    if Args[2] == "UpdateMousePos" then
-                        --print("UpdateMousePos Blocked")
-                        return nil
-                    elseif Args[2] == "AnimationPack" then
-                        if Args[3] == "Lay [X]" then
-                            return hook(self, "AnimationPack", "Lay")
-                        elseif Args[3] == "Greet [C]" then
-                            return hook(self, "AnimationPack", "Greet")
-                        end
-                    end
-                end
-            --[[
-            elseif namecall == "Activate" then
-                for i,v in pairs(Args) do
-                    print(tostring(i).." = "..tostring(v))
-                end
-                --]]
-            end
-            return hook(...)
-        end)
-    end)();
-end
-
 --Services
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
