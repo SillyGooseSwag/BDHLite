@@ -498,6 +498,7 @@ local function cancelVelocity(enabled)
 end
 
 ---Setup---
+print(tostring(isAlt(userId)))
 if PLAYER.UserId == getgenv().mainId then -- Player is main
     
 elseif isAlt(PLAYER.UserId) == true then -- Player is alt
