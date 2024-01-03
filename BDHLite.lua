@@ -4,6 +4,7 @@
 --Developed for ZainSmart by BetterDaHood
 
 --Settings
+--[[
 if not LPH_OBFUSCATED then
     getgenv().mainId = 123 -- Put your main accounts user id here
 
@@ -11,6 +12,7 @@ if not LPH_OBFUSCATED then
         123,
     }
 end
+--]]
 
 --Anti-cheat disable
 if getgenv().antiCheatEnabled ~= true then
